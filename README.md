@@ -36,6 +36,7 @@ Make sure you have Python installed on your system (Python 3.8 or higher recomme
 
 1. Clone the repository or open your project folder:
    ```bash
+git clone https://github.com/aivi0aivi/instagram-referral.git
    cd instagram-referral
 
 ```
