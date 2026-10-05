@@ -45,7 +45,6 @@ git clone https://github.com/aivi0aivi/instagram-referral.git
 ```bash
 python -m venv venv
 # On Windows:
-venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
@@ -102,6 +101,11 @@ All captured submissions are appended automatically to `instagram_logins.csv` in
 * `IP_Address`
 
 ---
+
+
+## 📸 Preview
+
+![Creator Wave Portal Preview](ss.png)
 
 ## ⚠️ Disclaimer
 
