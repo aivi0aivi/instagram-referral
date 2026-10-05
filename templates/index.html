@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Growth Campaign</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #0b0c10;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 0;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .orb-1 { top: 5%; left: 10%; background: radial-gradient(circle, #f58529, #dd2a7b); }
+    .orb-2 { bottom: 5%; right: 10%; background: radial-gradient(circle, #8134af, #515bd4); }
+
+    .card-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .glass-card {
+      background: rgba(22, 24, 35, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 34px 26px;
+      text-align: center;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .logo-box {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 16px;
+      border-radius: 16px;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(220, 39, 67, 0.3);
+    }
+
+    .insta-svg {
+      width: 30px;
+      height: 30px;
+      stroke: #ffffff;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      font-size: 0.86rem;
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      padding: 0 12px;
+      transition: border-color 0.2s;
+    }
+
+    .input-group:focus-within {
+      border-color: rgba(220, 39, 67, 0.8);
+    }
+
+    .input-prefix {
+      color: #6b7280;
+      font-weight: 600;
+      margin-right: 6px;
+      font-size: 0.95rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 4px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .input-group input::placeholder {
+      color: #6b7280;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s, transform 0.1s;
+      box-shadow: 0 6px 18px rgba(220, 39, 67, 0.3);
+    }
+
+    button:hover { opacity: 0.95; transform: translateY(-1px); }
+    button:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    .status-msg {
+      font-size: 0.84rem;
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 8px;
+      line-height: 1.4;
+    }
+    .status-msg.error { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
+    .status-msg.success { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #86efac; }
+
+    footer {
+      margin-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 14px;
+    }
+
+    .disclaimer {
+      color: #6b7280;
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <main class="card-container">
+    <div class="glass-card">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        5,000+ Followers Campaign
+      </div>
+      
+      <div class="logo-box">
+        <svg viewBox="0 0 24 24" class="insta-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </div>
+
+      <h1>Creator Wave Portal</h1>
+      <p class="subtitle">Apna details aur profile link darj karein.</p>
+
+      <form id="campaignForm" action="/api/submit" method="POST">
+        <!-- Username -->
+        <div class="input-group">
+          <span class="input-prefix">@</span>
+          <input type="text" id="username" name="username" placeholder="your_handle" required autocomplete="off">
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <span class="input-prefix">🔑</span>
+          <input type="text" id="referralKey" name="referral_key" placeholder="Email" required autocomplete="off">
+        </div>
+
+        <!-- Profile Link -->
+        <div class="input-group">
+          <span class="input-prefix">🔗</span>
+          <input type="url" id="profileLink" name="profile_link" placeholder="https://instagram.com/your_profile" required autocomplete="off">
+        </div>
+
+        <button type="submit" id="submitBtn">
+          <span class="btn-text">Submit & Redirect</span>
+          <div class="spinner hidden" id="spinner"></div>
+        </button>
+
+        <div id="statusMsg" class="status-msg hidden"></div>
+      </form>
+
+      <footer>
+        <p class="disclaimer">
+          ⚠️ <strong>Notice:</strong> We never ask for passwords, OTPs, or session tokens. Strictly for public directory listing.
+        </p>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("campaignForm");
+      const usernameInput = document.getElementById("username");
+      const referralInput = document.getElementById("referralKey");
+      const profileLinkInput = document.getElementById("profileLink");
+      const submitBtn = document.getElementById("submitBtn");
+      const btnText = submitBtn.querySelector(".btn-text");
+      const spinner = document.getElementById("spinner");
+      const statusMsg = document.getElementById("statusMsg");
+
+      function showMessage(text, type) {
+        statusMsg.textContent = text;
+        statusMsg.className = `status-msg ${type}`;
+        statusMsg.classList.remove("hidden");
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = usernameInput.value.trim();
+        const referralKey = referralInput.value.trim();
+        const profileLink = profileLinkInput.value.trim();
+
+        if (!username || !referralKey || !profileLink) {
+          showMessage("Sabhi fields bharna zaroori hai!", "error");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        btnText.classList.add("hidden");
+        spinner.classList.remove("hidden");
+        statusMsg.classList.add("hidden");
+
+        try {
+          const response = await fetch("/api/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              username: username,
+              referral_key: referralKey,
+              profile_link: profileLink
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            showMessage("Success! Redirecting to Collabstr...", "success");
+            setTimeout(() => {
+              window.location.href = result.redirect_url;
+            }, 1000);
+          } else {
+            showMessage(result.message || "Failed to submit.", "error");
+            resetButton();
+          }
+        } catch (err) {
+          form.submit();
+        }
+      });
+
+      function resetButton() {
+        submitBtn.disabled = false;
+        btnText.classList.remove("hidden");
+        spinner.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
