@@ -87,7 +87,7 @@ PORT=5001 python instagram.py
 
 
 6. Access the App:
-Open your browser and navigate to: `http://127.0.0.1:5000` ( ya `http://127.0.0.1:5001` jo bhi port aap use karein).
+Open your browser and navigate to: `http://127.0.0.1:5000` send target.
 
 ---
 
