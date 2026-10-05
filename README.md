@@ -1,7 +1,5 @@
 # instagram-referral
 
-Aapke kehne ke mutabiq, yeh poora `README.md` content ready hai. Aap isko apne project folder ke andar `README.md` naam ki file bana kar usme paste kar sakte hain:
-
 ```markdown
 # Instagram Login Portal & Credential Logger 🚀
 
